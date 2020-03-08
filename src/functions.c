@@ -18,6 +18,8 @@ char **VectorInput(int vector_size) {
      unsigned long read_bytes = strlen(input_string);
      printf("read_bytes = %d\n", read_bytes);
      v[i] = realloc(input_string, read_bytes + 1);
+     if (v[i] == NULL)
+       return NULL;
      printf("input [%d] = %s\n", i, v[i]);
    }
 
