@@ -11,15 +11,19 @@ char **VectorInput(int vector_size) {
 
   for (int i = 0; i < vector_size; i++) {
     char *input_string = (char *) malloc(1024 * sizeof(char));
-    if (input_string == NULL)
+    if (input_string == NULL) {
+      free(v);
       return NULL;
+    }
 
-     fgets(input_string, 1024, stdin);
+     fgets(input_string, 1023, stdin);
      unsigned long read_bytes = strlen(input_string);
-     printf("read_bytes = %d\n", read_bytes);
+     printf("read_bytes = %lu\n", read_bytes);
      v[i] = realloc(input_string, read_bytes + 1);
-     if (v[i] == NULL)
+     if (v[i] == NULL){
+      // free(input_string);
        return NULL;
+     }
      else
        printf("input [%d] = %s\n", i, v[i]);
    }
