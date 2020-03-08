@@ -39,8 +39,6 @@ int VectorSizeInput() {
   fgets(get_strings_number, 3, stdin);
   strings_number = strtol(get_strings_number, &end, 10);
   memset(get_strings_number, 0, 3);
-  //scanf("%d\n", &strings_number);
-  //strings_number = 5;
   printf("%d\n", strings_number);
   return strings_number;
 }
