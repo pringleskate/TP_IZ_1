@@ -6,8 +6,10 @@
 
 char **VectorInput(int vector_size) {
   char **v = (char **) malloc(vector_size * sizeof(char *));
-  if (v == NULL)
+  if (v == NULL) {
+    ClearAllocatedMemory(v, vector_size);
     return NULL;
+  }
 
   for (int i = 0; i < vector_size; i++) {
     char *input_string = (char *) malloc(1024 * sizeof(char));
@@ -20,8 +22,8 @@ char **VectorInput(int vector_size) {
      unsigned long read_bytes = strlen(input_string);
      printf("read_bytes = %lu\n", read_bytes);
      v[i] = realloc(input_string, read_bytes + 1);
-     if (v[i] == NULL){
-      // free(input_string);
+     if (v[i] == NULL) {
+       ClearAllocatedMemory(v, vector_size);
        return NULL;
      }
      else
