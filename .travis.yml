@@ -32,5 +32,5 @@ script:
   - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
   - cmake --build .
   - ctest --output-on-failure
-  - if [ $TRAVIS_OS_NAME = linux ]; then valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all ./iz1; fi
-  - if [ $TRAVIS_OS_NAME = linux ]; then cppcheck --error-exitcode=1 --inconclusive --enable=all --language=c ../src ../include; fi
+  - if [ $TRAVIS_OS_NAME = linux ]; then valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all ./untitled1; fi
+  - if [ $TRAVIS_OS_NAME = linux ]; then cppcheck --error-exitcode=1 --inconclusive --enable=all --language=c ../src ../inc; fi
