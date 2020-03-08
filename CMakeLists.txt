@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(untitled1 C)
-
 set(CMAKE_C_STANDARD 99)
-
-add_executable(untitled1 main.c functions.c functions.h)
+enable_testing()
+add_subdirectory(test)
+add_executable(untitled1 src/main.c src/functions.c inc/functions.h)
+add_test(NAME unit_test COMMAND test_filter)

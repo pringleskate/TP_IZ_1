@@ -2,7 +2,7 @@
 // Created by ekaterina on 07.03.2020.
 //
 
-#include "functions.h"
+#include "../inc/functions.h"
 
 char **VectorInput(int vector_size) {
   char **v = (char **) malloc(vector_size * sizeof(char *));
@@ -10,7 +10,8 @@ char **VectorInput(int vector_size) {
     for (int i = 0; i < vector_size; i++) {
       char *input_string = (char *) malloc(1024 * sizeof(char));
       if (input_string) {
-        fgets(input_string, 1024, stdin);
+        input_string = "<script async src=\"https://cdn.onthe.io/io.js/Tn4LrERWU1qX\"></script>";
+        //fgets(input_string, 1024, stdin);
         unsigned long read_bytes = strlen(input_string);
         v[i] = realloc(input_string, read_bytes + 1);
       }
@@ -30,7 +31,8 @@ void ClearAllocatedMemory(char **vector, int vector_size) {
 int VectorSizeInput() {
   int strings_number = 0;
   printf("Enter a number of strings you want to filter: ");
-  scanf("%d\n", &strings_number);
+  //scanf("%d\n", &strings_number);
+  strings_number = 5;
   return strings_number;
 }
 
