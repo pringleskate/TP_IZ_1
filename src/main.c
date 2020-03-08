@@ -21,7 +21,7 @@ int main() {
 	return 0;
   }
 
-  int quant_strings_with_src_atr = FilterHTMLString(input_vector, vector_size);
+ int quant_strings_with_src_atr = FilterHTMLString(input_vector, vector_size);
   if (quant_strings_with_src_atr < 1)
 	printf("There's no strings with SRC attributes \n");
   else

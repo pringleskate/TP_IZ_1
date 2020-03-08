@@ -22,15 +22,15 @@ TEST(testMainFunc, test1)
   char *str_5 = "<script async src=\"https://cdn.onthe.io/io.js/Tn4LrERWU1qX\"></script>";
 
   int strings_sizes[5];
-  strings_sizes[0] = strlen(str_1);
-  strings_sizes[1] = strlen(str_2);
-  strings_sizes[2] = strlen(str_3);
-  strings_sizes[3] = strlen(str_4);
-  strings_sizes[4] = strlen(str_5);
+  strings_sizes[0] = strlen(str_1) + 1;
+  strings_sizes[1] = strlen(str_2) + 1;
+  strings_sizes[2] = strlen(str_3) + 1;
+  strings_sizes[3] = strlen(str_4) + 1;
+  strings_sizes[4] = strlen(str_5) + 1;
 
   char **vector = (char **)malloc(strings_number * sizeof(char *));
   for (int i = 0; i < strings_number; i++) {
-    vector[i] = (char *)malloc((strings_sizes[i] + 1) * sizeof(char));
+    vector[i] = (char *)malloc(strings_sizes[i] * sizeof(char));
   }
 
   initialize_vector(vector, str_1, 0);
@@ -42,6 +42,8 @@ TEST(testMainFunc, test1)
   int expected_return = 2;
   int test_return = FilterHTMLString(vector, strings_number);
   ASSERT_EQ(expected_return, test_return);
+
+  ClearAllocatedMemory(vector, strings_number);
 }
 
 
@@ -55,15 +57,15 @@ TEST(testMainFunc, test2)
   char *str_5 = "<script src=\"\" ></script>";
 
   int strings_sizes[5];
-  strings_sizes[0] = strlen(str_1);
-  strings_sizes[1] = strlen(str_2);
-  strings_sizes[2] = strlen(str_3);
-  strings_sizes[3] = strlen(str_4);
-  strings_sizes[4] = strlen(str_5);
+  strings_sizes[0] = strlen(str_1) + 1;
+  strings_sizes[1] = strlen(str_2) + 1;
+  strings_sizes[2] = strlen(str_3) + 1;
+  strings_sizes[3] = strlen(str_4) + 1;
+  strings_sizes[4] = strlen(str_5) + 1;
 
   char **vector = (char **)malloc(strings_number * sizeof(char *));
   for (int i = 0; i < strings_number; i++) {
-    vector[i] = (char *)malloc((strings_sizes[i] + 1) * sizeof(char));
+    vector[i] = (char *)malloc(strings_sizes[i] * sizeof(char));
   }
 
   initialize_vector(vector, str_1, 0);
@@ -75,6 +77,8 @@ TEST(testMainFunc, test2)
   int expected_return = 0;
   int test_return = FilterHTMLString(vector, strings_number);
   ASSERT_EQ(expected_return, test_return);
+
+  ClearAllocatedMemory(vector, strings_number);
 }
 
 TEST(testMainFunc, test3)
@@ -85,15 +89,14 @@ TEST(testMainFunc, test3)
   char *str_3 = "";
 
   int strings_sizes[5];
-  strings_sizes[0] = strlen(str_1);
-  strings_sizes[1] = strlen(str_2);
-  strings_sizes[2] = strlen(str_3);
+  strings_sizes[0] = strlen(str_1) + 1;
+  strings_sizes[1] = strlen(str_2) + 1;
+  strings_sizes[2] = strlen(str_3) + 1;
 
 
   char **vector = (char **)malloc(strings_number * sizeof(char *));
-  for (int i = 0; i < strings_number; i++) {
-    vector[i] = (char *)malloc((strings_sizes[i] + 1) * sizeof(char));
-  }
+  for (int i = 0; i < strings_number; i++)
+    vector[i] = (char *)malloc((strings_sizes[i]) * sizeof(char));
 
   initialize_vector(vector, str_1, 0);
   initialize_vector(vector, str_2, 1);
@@ -102,9 +105,11 @@ TEST(testMainFunc, test3)
   int expected_return = 0;
   int test_return = FilterHTMLString(vector, strings_number);
   ASSERT_EQ(expected_return, test_return);
+
+  ClearAllocatedMemory(vector, strings_number);
 }
 
 void initialize_vector(char **vector, char *str, int index) {
-  for (int j = 0; j < strlen(str); j++)
+  for (int j = 0; j < (strlen(str) + 1); j++)
     vector[index][j] = str[j];
 }
