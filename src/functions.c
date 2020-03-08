@@ -22,8 +22,10 @@ char **VectorInput(int vector_size) {
      //v[i] = realloc(input_string, read_bytes + 1);
      if (tmp == NULL)
        return NULL;
-     else
+     else {
        v[i] = tmp;
+       free(tmp);
+     }
 
      printf("input [%d] = %s\n", i, v[i]);
    }
