@@ -12,7 +12,7 @@ char **VectorInput(int vector_size) {
   for (int i = 0; i < vector_size; i++) {
     char *input_string = (char *) malloc(1024 * sizeof(char));
     if (input_string == NULL) {
-      free(v);
+      ClearAllocatedMemory(v, vector_size);
       return NULL;
     }
 
