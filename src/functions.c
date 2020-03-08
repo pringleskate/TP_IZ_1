@@ -17,17 +17,11 @@ char **VectorInput(int vector_size) {
      fgets(input_string, 1024, stdin);
      unsigned long read_bytes = strlen(input_string);
      printf("read_bytes = %d\n", read_bytes);
-     char *tmp;
-     tmp = realloc(input_string, read_bytes + 1);
-     //v[i] = realloc(input_string, read_bytes + 1);
-     if (tmp == NULL)
+     v[i] = realloc(input_string, read_bytes + 1);
+     if (v[i] == NULL)
        return NULL;
-     else {
-       v[i] = tmp;
-       free(tmp);
-     }
-
-     printf("input [%d] = %s\n", i, v[i]);
+     else
+       printf("input [%d] = %s\n", i, v[i]);
    }
 
     return v;
