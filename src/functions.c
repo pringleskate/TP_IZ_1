@@ -12,13 +12,13 @@ char **VectorInput(int vector_size) {
   }
 
   for (int i = 0; i < vector_size; i++) {
-    char *input_string = (char *) malloc(1024 * sizeof(char));
+    char *input_string = (char *) malloc(BUFFER_SIZE * sizeof(char));
     if (input_string == NULL) {
       ClearAllocatedMemory(v, vector_size);
       return NULL;
     }
 
-     fgets(input_string, 1023, stdin);
+     fgets(input_string, BUFFER_SIZE, stdin);
      unsigned long read_bytes = strlen(input_string);
      printf("read_bytes = %lu\n", read_bytes);
      v[i] = realloc(input_string, read_bytes + 1);
@@ -35,9 +35,13 @@ char **VectorInput(int vector_size) {
 
 
 void ClearAllocatedMemory(char **vector, int vector_size) {
-  for (int i = 0; i < vector_size; i++)
-    free(vector[i]);
-  free(vector);
+  if (vector != NULL) {
+    for (int i = 0; i < vector_size; i++) {
+      if (vector[i] != NULL)
+        free(vector[i]);
+    }
+    free(vector);
+  }
 }
 
 int VectorSizeInput() {
@@ -52,7 +56,19 @@ int VectorSizeInput() {
   return strings_number;
 }
 
-int FilterHTMLString(char **input_vector, int vector_size) {
+void CopyString(char **output_vector, char *input_string, int *output_vector_size) {
+  int string_size = strlen(input_string) + 1;
+  output_vector[*output_vector_size] = (char *)malloc(string_size * sizeof(char));
+  if (output_vector[*output_vector_size] != NULL) {
+    for (int j = 0; j < string_size; j++)
+      output_vector[*output_vector_size][j] = input_string[j];
+    (*output_vector_size)++;
+  }
+  else
+    ClearAllocatedMemory(output_vector, *output_vector_size);
+}
+
+int FilterHTMLString(char **input_vector, int vector_size, char **output_vector, int *output_vector_size) {
   int src_string_length = 3;
   int quant_strings_with_src_atr = 0;
 
@@ -64,11 +80,15 @@ int FilterHTMLString(char **input_vector, int vector_size) {
 
         if (((int) input_vector[i][j] == '=') && ((int) input_vector[i][j + 1] == '"') && ((int) input_vector[i][j + 2] != '"')) {
           quant_strings_with_src_atr++;
+          CopyString(output_vector, input_vector[i], output_vector_size);
+          printf("output[] = %s size = %d \n", output_vector[(*output_vector_size) - 1], *output_vector_size);
           break;
         }
       }
       j++;
     }
   }
+  //printf("output size = %d\n", output_vector_size);
   return quant_strings_with_src_atr;
 }
+

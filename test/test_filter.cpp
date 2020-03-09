@@ -39,11 +39,15 @@ TEST(testMainFunc, test1)
   initialize_vector(vector, str_4, 3);
   initialize_vector(vector, str_5, 4);
 
+  char **output_vector = (char **)malloc(strings_number * sizeof(char *));
+  int output_vector_size = 0;
+
   int expected_return = 2;
-  int test_return = FilterHTMLString(vector, strings_number);
+  int test_return = FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
   ASSERT_EQ(expected_return, test_return);
 
   ClearAllocatedMemory(vector, strings_number);
+  ClearAllocatedMemory(output_vector, output_vector_size);
 }
 
 
@@ -74,11 +78,15 @@ TEST(testMainFunc, test2)
   initialize_vector(vector, str_4, 3);
   initialize_vector(vector, str_5, 4);
 
+  char **output_vector = (char **)malloc(strings_number * sizeof(char *));
+  int output_vector_size = 0;
+
   int expected_return = 0;
-  int test_return = FilterHTMLString(vector, strings_number);
+  int test_return = FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
   ASSERT_EQ(expected_return, test_return);
 
   ClearAllocatedMemory(vector, strings_number);
+  ClearAllocatedMemory(output_vector, output_vector_size);
 }
 
 TEST(testMainFunc, test3)
@@ -102,11 +110,15 @@ TEST(testMainFunc, test3)
   initialize_vector(vector, str_2, 1);
   initialize_vector(vector, str_3, 2);
 
+  char **output_vector = (char **)malloc(strings_number * sizeof(char *));
+  int output_vector_size = 0;
+
   int expected_return = 0;
-  int test_return = FilterHTMLString(vector, strings_number);
+  int test_return = FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
   ASSERT_EQ(expected_return, test_return);
 
   ClearAllocatedMemory(vector, strings_number);
+  ClearAllocatedMemory(output_vector, output_vector_size);
 }
 
 void initialize_vector(char **vector, char *str, int index) {
