@@ -81,14 +81,12 @@ int FilterHTMLString(char **input_vector, int vector_size, char **output_vector,
         if (((int) input_vector[i][j] == '=') && ((int) input_vector[i][j + 1] == '"') && ((int) input_vector[i][j + 2] != '"')) {
           quant_strings_with_src_atr++;
           CopyString(output_vector, input_vector[i], output_vector_size);
-          printf("output[] = %s size = %d \n", output_vector[(*output_vector_size) - 1], *output_vector_size);
           break;
         }
       }
       j++;
     }
   }
-  //printf("output size = %d\n", output_vector_size);
   return quant_strings_with_src_atr;
 }
 
