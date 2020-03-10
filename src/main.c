@@ -28,11 +28,16 @@ int main() {
   int output_vector_size = 0;
 
 
-  int quant_strings_with_src_atr = FilterHTMLString(input_vector, vector_size, output_vector, 0);
-  if (quant_strings_with_src_atr < 1)
+  //int quant_strings_with_src_atr =
+  FilterHTMLString(input_vector, vector_size, output_vector, &output_vector_size);
+/*  if (quant_strings_with_src_atr < 1)
 	printf("There's no strings with SRC attributes \n");
   else
-	printf("Quantity of strings with SRC attributes = %d", quant_strings_with_src_atr);
+	printf("Quantity of strings with SRC attributes = %d", quant_strings_with_src_atr);*/
+  if (output_vector_size < 1)
+    printf("There's no strings with SRC attributes \n");
+  else
+    printf("Quantity of strings with SRC attributes = %d", output_vector_size);
 
   ClearAllocatedMemory(input_vector, vector_size);
   ClearAllocatedMemory(output_vector, output_vector_size);

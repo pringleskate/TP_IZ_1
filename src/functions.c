@@ -60,15 +60,14 @@ void CopyString(char **output_vector, char *input_string, int *output_vector_siz
   int string_size = strlen(input_string) + 1;
   output_vector[*output_vector_size] = (char *)malloc(string_size * sizeof(char));
   if (output_vector[*output_vector_size] != NULL) {
-    for (int j = 0; j < string_size; j++)
-      output_vector[*output_vector_size][j] = input_string[j];
+    memcpy(output_vector[*output_vector_size], input_string, string_size);
     (*output_vector_size)++;
   }
   else
     ClearAllocatedMemory(output_vector, *output_vector_size);
 }
 
-int FilterHTMLString(char **input_vector, int vector_size, char **output_vector, int *output_vector_size) {
+void FilterHTMLString(char **input_vector, int vector_size, char **output_vector, int *output_vector_size) {
   int src_string_length = 3;
   int quant_strings_with_src_atr = 0;
 
@@ -87,6 +86,5 @@ int FilterHTMLString(char **input_vector, int vector_size, char **output_vector,
       j++;
     }
   }
-  return quant_strings_with_src_atr;
 }
 

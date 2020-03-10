@@ -10,7 +10,7 @@
 #include <string.h>
 #define BUFFER_SIZE 1024
 
-int FilterHTMLString(char **input_vector, int vector_size, char **output_vector, int *output_vector_size);
+void FilterHTMLString(char **input_vector, int vector_size, char **output_vector, int *output_vector_size);
 char **VectorInput(int vector_size);
 int VectorSizeInput();
 void ClearAllocatedMemory(char **vector, int vector_size);

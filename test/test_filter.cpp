@@ -10,8 +10,6 @@ extern "C"
   #include "../inc/functions.h"
 }
 
-void initialize_vector(char **vector, char *str, int index);
-
 TEST(testMainFunc, test1)
 {
   int strings_number = 5;
@@ -33,17 +31,18 @@ TEST(testMainFunc, test1)
     vector[i] = (char *)malloc(strings_sizes[i] * sizeof(char));
   }
 
-  initialize_vector(vector, str_1, 0);
-  initialize_vector(vector, str_2, 1);
-  initialize_vector(vector, str_3, 2);
-  initialize_vector(vector, str_4, 3);
-  initialize_vector(vector, str_5, 4);
+  memcpy(vector[0], str_1, strings_sizes[0]);
+  memcpy(vector[1], str_2, strings_sizes[1]);
+  memcpy(vector[2], str_3, strings_sizes[2]);
+  memcpy(vector[3], str_4, strings_sizes[3]);
+  memcpy(vector[4], str_5, strings_sizes[4]);
 
   char **output_vector = (char **)malloc(strings_number * sizeof(char *));
   int output_vector_size = 0;
 
   int expected_return = 2;
-  int test_return = FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
+  FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
+  int test_return = output_vector_size;
   ASSERT_EQ(expected_return, test_return);
 
   ClearAllocatedMemory(vector, strings_number);
@@ -72,17 +71,18 @@ TEST(testMainFunc, test2)
     vector[i] = (char *)malloc(strings_sizes[i] * sizeof(char));
   }
 
-  initialize_vector(vector, str_1, 0);
-  initialize_vector(vector, str_2, 1);
-  initialize_vector(vector, str_3, 2);
-  initialize_vector(vector, str_4, 3);
-  initialize_vector(vector, str_5, 4);
+  memcpy(vector[0], str_1, strings_sizes[0]);
+  memcpy(vector[1], str_2, strings_sizes[1]);
+  memcpy(vector[2], str_3, strings_sizes[2]);
+  memcpy(vector[3], str_4, strings_sizes[3]);
+  memcpy(vector[4], str_5, strings_sizes[4]);
 
   char **output_vector = (char **)malloc(strings_number * sizeof(char *));
   int output_vector_size = 0;
 
   int expected_return = 0;
-  int test_return = FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
+  FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
+  int test_return = output_vector_size;
   ASSERT_EQ(expected_return, test_return);
 
   ClearAllocatedMemory(vector, strings_number);
@@ -106,22 +106,18 @@ TEST(testMainFunc, test3)
   for (int i = 0; i < strings_number; i++)
     vector[i] = (char *)malloc((strings_sizes[i]) * sizeof(char));
 
-  initialize_vector(vector, str_1, 0);
-  initialize_vector(vector, str_2, 1);
-  initialize_vector(vector, str_3, 2);
+  memcpy(vector[0], str_1, strings_sizes[0]);
+  memcpy(vector[1], str_2, strings_sizes[1]);
+  memcpy(vector[2], str_3, strings_sizes[2]);
 
   char **output_vector = (char **)malloc(strings_number * sizeof(char *));
   int output_vector_size = 0;
 
   int expected_return = 0;
-  int test_return = FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
+  FilterHTMLString(vector, strings_number, output_vector, &output_vector_size);
+  int test_return = output_vector_size;
   ASSERT_EQ(expected_return, test_return);
 
   ClearAllocatedMemory(vector, strings_number);
   ClearAllocatedMemory(output_vector, output_vector_size);
-}
-
-void initialize_vector(char **vector, char *str, int index) {
-  for (int j = 0; j < (strlen(str) + 1); j++)
-    vector[index][j] = str[j];
 }
